@@ -23,6 +23,18 @@ const projectSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   }
-})
+});
+
+projectSchema.index({
+  org: 1,
+  name: 1
+},{
+  unique: true
+});
+
+const projectVirtual_budget = projectSchema.virtual('budgetLeft');
+projectVirtual_budget.get(function () {
+  return (this.budget - this.spent);
+});
 
 module.exports = mongoose.model('project', projectSchema)

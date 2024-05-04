@@ -1,6 +1,17 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'author',
+  },
+  similarPost:[
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'post',
+    }
+  ],
   title: {
     type: String,
     required: true,
